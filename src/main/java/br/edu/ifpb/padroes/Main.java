@@ -6,6 +6,10 @@ import br.edu.ifpb.padroes.domain.Pizza;
 import br.edu.ifpb.padroes.domain.PizzaShopPizza;
 import br.edu.ifpb.padroes.service.PizzaShopService;
 
+import br.edu.ifpb.padroes.api.decorator.DiscountCupom;
+import br.edu.ifpb.padroes.api.decorator.ExtraCheese;
+import br.edu.ifpb.padroes.api.decorator.StuffedCrust;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -24,9 +28,11 @@ public class Main {
 
         Pizza pizza = new PizzaShopPizza("pepperoni", 55.0f);
 
+        Pizza discountCupom = new DiscountCupom(pizza);
+        Pizza extraCheese = new ExtraCheese(discountCupom);
+        Pizza stuffedCrust = new StuffedCrust(extraCheese);
+
         // TODO - implementar padrão decorator para só precisar passar o objeto pizza
-        pizzaShopService.orderPizza(pizza, true, true, false, true);
-
+        pizzaShopService.orderPizza(stuffedCrust);
     }
-
 }
